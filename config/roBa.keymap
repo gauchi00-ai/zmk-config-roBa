@@ -59,10 +59,10 @@
 
         ARROW {
             bindings = <
-&mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4   &kp N5                                                 &kp LC(Y)           &kp LC(Z)  &kp UP_ARROW   &kp NUMBER_9        &mt RIGHT_CONTROL N0
-&kp LEFT_CONTROL       &none         &kp DELETE    &kp BACKSPACE  &kp GRAVE         &trans                   &none       &kp LA(LEFT_ARROW)  &kp LEFT   &kp DOWN       &kp RIGHT_ARROW     &kp LA(RIGHT)
-&kp LEFT_SHIFT         &none         &none         &none          &kp LEFT_BRACKET  &none                    &none       &kp RIGHT_BRACKET   &tog 2     &kp SEMICOLON  &lt 3 SINGLE_QUOTE  &mt RIGHT_SHIFT BACKSLASH
-&trans                 &trans        &trans        &trans         &trans            &mt LEFT_WIN DELETE      &kp DELETE  &trans                                                            &none
+&mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5                                    &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
+&kp LEFT_CONTROL       &none         &trans        &trans        &kp GRAVE  &trans      &kp LEFT_BRACKET   &kp LA(LEFT_ARROW)  &kp LEFT         &kp DOWN       &kp RIGHT_ARROW  &kp SEMI
+&kp LEFT_SHIFT         &none         &none         &none         &trans     &none       &kp RIGHT_BRACKET  &kp LEFT_BRACE      &kp RIGHT_BRACE  &kp SEMICOLON  &trans           &trans
+&trans                 &trans        &trans        &trans        &trans     &trans      &kp DELETE         &trans                                                               &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
