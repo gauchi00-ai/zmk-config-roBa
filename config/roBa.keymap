@@ -109,21 +109,5 @@
 &trans        &trans          &trans          &bt BT_CLR       &none         &none      &none  &none                       &trans
             >;
         };
-
- scroll_layer {
-        label = "Scroll";
-        bindings = <
-            // 他のキーは透明（&trans）でベースレイヤーを引き継ぐ
-            &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans &trans
-
-            &trackball_scroll   // ← ここだけスクロールに！
-        >;
-    };
-};
-
     };
 };
