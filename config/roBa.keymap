@@ -40,6 +40,11 @@
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
 
             tap-ms = <15>;
+         zoom_in_out: behavior_sensor_rotate_zoom_in_out {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+        bindings = <&kp LC(EQUAL)>, <&kp LC(MINUS)>;
+        tap-ms = <20>;
         };
     };
 
@@ -53,6 +58,7 @@
 &kp Z               &kp X         &kp C    &kp V     &kp B        &lt 2 CAPSLOCK      &kp RIGHT_PARENTHESIS  &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
 &kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 4 SPACE  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
             >;
+ sensor-bindings = <&zoom_in_out>;  
         };
 
         ARROW {
