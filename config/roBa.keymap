@@ -39,7 +39,7 @@
             #sensor-binding-cells = <0>;
             bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
             sensor = <&pmw3360>;  // あなたのセンサー名に合わせて変更（例: &pmw3360, &pmw3389）
-            scroll-divisor = <6>; // スクロール感度（1=速い, 6=標準, 10=遅い）
+            scroll-divisor = <7>; // スクロール感度（1=速い, 6=標準, 10=遅い）
             label = "SCROLL_UP_DOWN";
         };
     };
