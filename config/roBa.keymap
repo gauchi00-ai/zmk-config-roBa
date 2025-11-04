@@ -26,27 +26,33 @@
 
     behaviors {
         /* --- 通常のHold-Tap（レイヤー0に戻る） --- */
+
         lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
+
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
 
         /* --- トラックボール用：スクロール動作 --- */
+
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
             tap-ms = <15>;
         };
 
         /* --- ロータリーエンコーダ用：拡大縮小（Ctrl + = / Ctrl + -） --- */
+
         zoom_in_out: behavior_sensor_rotate_zoom_in_out {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&kp LC(EQUAL)>, <&kp LC(MINUS)>;
+
             tap-ms = <20>;
         };
     };
@@ -55,19 +61,22 @@
         compatible = "zmk,keymap";
 
         /* --- デフォルトレイヤー --- */
+
         default_layer {
             bindings = <
 &kp Q               &kp W         &kp E    &kp R     &kp T                                                   &kp Y        &kp U  &mt LCTRL I  &kp O       &kp P
 &mt LEFT_CONTROL A  &mt LCTRL S   &kp D    &kp F     &kp G        &msc MOVE_Y(5)      &kp LEFT_PARENTHESIS   &kp H        &kp J  &lt 3 K      &kp L       &kp COLON
 &kp Z               &kp X         &kp C    &kp V     &kp B        &lt 2 CAPSLOCK      &kp RIGHT_PARENTHESIS  &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
-&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 4 SPACE  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
+&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 3 SPACE  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
             >;
 
             // ✅ ロータリーエンコーダによる拡大縮小をこのレイヤーで有効化
+
             sensor-bindings = <&zoom_in_out>;
         };
 
         /* --- ARROWレイヤー --- */
+
         ARROW {
             bindings = <
 &mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5                                    &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
@@ -80,6 +89,7 @@
         };
 
         /* --- FUNCTIONレイヤー --- */
+
         FUNCTION {
             bindings = <
 &kp PLUS   &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0                               &kp AMPERSAND    &kp F7       &kp F8     &kp LC(TAB)     &kp LC(LS(TAB))
@@ -90,6 +100,7 @@
         };
 
         /* --- MEDIAレイヤー（ここでのみトラックボールでスクロール有効） --- */
+
         MEDIA {
             bindings = <
 &kp LEFT_ALT      &none           &none             &none       &none                       &trans             &trans          &trans           &mkp MB1         &mkp MB2
@@ -99,10 +110,12 @@
             >;
 
             // ✅ MEDIAレイヤーでのみトラックボールによるスクロールを有効化
+
             sensor-bindings = <&scroll_up_down>;
         };
 
         /* --- BLEレイヤー --- */
+
         BLE {
             bindings = <
 &none         &none           &kp UP_ARROW    &none            &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
@@ -113,6 +126,7 @@
         };
 
         /* --- 予備レイヤー --- */
+
         layer_5 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
