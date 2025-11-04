@@ -90,10 +90,10 @@
 
         BLE {
             bindings = <
-&none         &none         &none         &none         &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
-&none         &none         &none         &none         &none         &none      &none  &none  &none  &none  &none  &none
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none      &none  &none  &none  &none  &none  &none
-&trans        &trans        &trans        &bt BT_CLR    &none         &none      &none  &none                       &trans
+&none         &none           &kp UP_ARROW    &none            &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
+&none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none         &none      &none  &none  &none  &none  &none  &none
+&bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4  &none      &none  &none  &none  &none  &none  &none
+&trans        &trans          &trans          &bt BT_CLR       &none         &none      &none  &none                       &trans
             >;
         };
     };
