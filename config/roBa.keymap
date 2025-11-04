@@ -41,6 +41,19 @@
 
             tap-ms = <15>;
         };
+
+        // スクロール用（新しく追加！）
+        trackball_scroll: trackball_scroll {
+            compatible = "zmk,behavior-sensor-rotate";
+            #binding-cells = <0>;
+            bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
+            // ↑ 上下スクロール（X軸無視、Y軸でスクロール）
+            sensor = <&pmw3360>;
+            // 感度調整（オプション）
+            scroll-divisor = <4>;  // 1/4 感度（細かくスクロール）
+        };
+    };
+};
     };
 
     keymap {
