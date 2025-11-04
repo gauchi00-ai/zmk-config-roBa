@@ -36,7 +36,7 @@
             tapping-term-ms = <250>;
             quick-tap-ms = <0>;
             flavor = "tap-preferred";  // ← タップ優先
-            bindings = <&kp SPACE>, <&mo MEDIA>;
+            bindings = <&mo MEDIA>,<&kp SPACE>;
         };
 
         // =====================================================
