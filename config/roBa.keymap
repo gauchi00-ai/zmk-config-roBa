@@ -55,15 +55,15 @@
         // =====================================================
         // 拡大・縮小用（ロータリーエンコーダ等）
         // =====================================================
+zoom_in_out: zoom_in_out {
+    compatible = "zmk,behavior-sensor-rotate";
+    label = "ZOOM_IN_OUT";
+    #sensor-binding-cells = <0>;
+    bindings = <&kp LC(EQUAL)>, <&kp LC(MINUS)>;
+    tap-ms = <20>;
+};
 
-        zoom_in_out: behavior_sensor_rotate_zoom_in_out {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp LC(EQUAL)>, <&kp LC(MINUS)>;
-
-            tap-ms = <20>;
-        };
-
+        
         // =====================================================
         // hold-tap のテンプレ
         // =====================================================
