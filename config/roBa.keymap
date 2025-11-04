@@ -40,6 +40,8 @@
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
 
             tap-ms = <15>;
+        };
+
          zoom_in_out: behavior_sensor_rotate_zoom_in_out {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
