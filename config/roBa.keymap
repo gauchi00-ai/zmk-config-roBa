@@ -29,123 +29,81 @@
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_TAP_TO_0";
             bindings = <&mo>, <&to_layer_0>;
+
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
 
-        // スクロール専用ビヘイビア（トラックボール → 上下スクロール）
-        scroll_up_down: scroll_up_down {
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
-            sensor = <&pmw3360>;  // あなたのセンサー名に合わせて変更（例: &pmw3360, &pmw3389）
-            scroll-divisor = <6>; // スクロール感度（1=速い, 6=標準, 10=遅い）
-            label = "SCROLL_UP_DOWN";
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            tap-ms = <15>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        // デフォルトレイヤー（マウス移動あり）
         default_layer {
             bindings = <
-                &kp Q               &kp W         &kp E    &kp R     &kp T
-                &mt LEFT_CONTROL A  &mt LCTRL S   &kp D    &kp F     &kp G
-                &kp Z               &kp X         &kp C    &kp V     &kp B
-                &kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 4 SPACE
-
-                                           &kp Y        &kp U  &mt LCTRL I  &kp O       &kp P
-                                           &kp H        &kp J  &lt 3 K      &kp L       &kp COLON
-                                           &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
-                &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
+&kp Q               &kp W         &kp E    &kp R     &kp T                                                   &kp Y        &kp U  &mt LCTRL I  &kp O       &kp P
+&mt LEFT_CONTROL A  &mt LCTRL S   &kp D    &kp F     &kp G        &msc MOVE_Y(5)      &kp LEFT_PARENTHESIS   &kp H        &kp J  &lt 3 K      &kp L       &kp COLON
+&kp Z               &kp X         &kp C    &kp V     &kp B        &lt 2 CAPSLOCK      &kp RIGHT_PARENTHESIS  &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
+&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 4 SPACE  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
             >;
 
-            // デフォルトではマウス移動（センサー回転でカーソル移動）
-            sensor-bindings = <&inc_dec_kp C_MOUSE_UP C_MOUSE_DOWN C_MOUSE_LEFT C_MOUSE_RIGHT>;
+            sensor-bindings = <&scroll_up_down>;
         };
 
-        // 矢印レイヤー
         ARROW {
             bindings = <
-                &mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5
-                &kp LEFT_CONTROL       &none         &trans        &trans        &kp GRAVE
-                &kp LEFT_SHIFT         &none         &none         &none         &trans
-                &trans                 &trans        &trans        &trans        &trans
-
-                                           &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
-                                           &kp LA(LEFT_ARROW)  &kp LEFT         &kp DOWN       &kp RIGHT_ARROW  &kp SEMI
-                                           &kp LEFT_BRACE      &kp RIGHT_BRACE  &kp SEMICOLON  &trans           &trans
-                &trans      &kp LEFT_BRACKET   &kp RIGHT_BRACKET  &kp DELETE         &trans                                                               &none
+&mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5                                    &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
+&kp LEFT_CONTROL       &none         &trans        &trans        &kp GRAVE  &trans      &kp LEFT_BRACKET   &kp LA(LEFT_ARROW)  &kp LEFT         &kp DOWN       &kp RIGHT_ARROW  &kp SEMI
+&kp LEFT_SHIFT         &none         &none         &none         &trans     &none       &kp RIGHT_BRACKET  &kp LEFT_BRACE      &kp RIGHT_BRACE  &kp SEMICOLON  &trans           &trans
+&trans                 &trans        &trans        &trans        &trans     &trans      &kp DELETE         &trans                                                               &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
-        // ファンクション
         FUNCTION {
             bindings = <
-                &kp PLUS   &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0
-                &kp MINUS  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp PERIOD
-                &kp ASTRK  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL
-                &kp SLASH  &trans        &trans        &mkp MB1      &kp SPACE
-
-                                           &kp AMPERSAND    &kp F7       &kp F8     &kp LC(TAB)     &kp LC(LS(TAB))
-                                           &kp DOLLAR       &kp PERCENT  &kp CARET  &kp TILDE       &kp PIPE
-                                           &kp EXCLAMATION  &kp AT_SIGN  &kp HASH   &kp UNDERSCORE  &kp BACKSLASH
-                &mkp MB2      &kp BACKSPACE  &trans                                                   &kp LG(D)
+&kp PLUS   &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0                               &kp AMPERSAND    &kp F7       &kp F8     &kp LC(TAB)     &kp LC(LS(TAB))
+&kp MINUS  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp PERIOD    &trans        &kp HOME       &kp DOLLAR       &kp PERCENT  &kp CARET  &kp TILDE       &kp PIPE
+&kp ASTRK  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL     &trans        &kp END        &kp EXCLAMATION  &kp AT_SIGN  &kp HASH   &kp UNDERSCORE  &kp BACKSLASH
+&kp SLASH  &trans        &trans        &mkp MB1      &kp SPACE     &mkp MB2      &kp BACKSPACE  &trans                                                   &kp LG(D)
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
-        // メディア
         MEDIA {
             bindings = <
-                &kp LEFT_ALT      &none           &none             &none       &none
-                &kp LEFT_CONTROL  &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT  &none
-                &kp LEFT_SHIFT    &none           &none             &none       &none
-                &trans            &trans          &trans            &trans      &trans
-
-                                           &trans             &trans          &trans           &mkp MB1         &mkp MB2
-                                           &trans      &trans  &kp LEFT_ARROW     &kp DOWN_ARROW  &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ALT
-                                           &none       &none   &kp C_VOLUME_DOWN  &kp K_MUTE      &kp C_VOLUME_UP  &trans           &kp RIGHT_SHIFT
-                &trans      &trans  &trans                                                               &trans
+&kp LEFT_ALT      &none           &none             &none       &none                       &trans             &trans          &trans           &mkp MB1         &mkp MB2
+&kp LEFT_CONTROL  &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT  &none   &trans      &trans  &kp LEFT_ARROW     &kp DOWN_ARROW  &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ALT
+&kp LEFT_SHIFT    &none           &none             &none       &none   &none       &none   &kp C_VOLUME_DOWN  &kp K_MUTE      &kp C_VOLUME_UP  &trans           &kp RIGHT_SHIFT
+&trans            &trans          &trans            &trans      &trans  &trans      &trans  &trans                                                               &trans
             >;
         };
 
-        // BLE
         BLE {
             bindings = <
-                &none         &none           &kp UP_ARROW    &none            &none
-                &none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none
-                &bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4
-                &trans        &trans          &trans          &bt BT_CLR       &none
-
-                                           &none  &none  &none  &none  &bt BT_CLR_ALL
-                                           &none      &none  &none  &none  &none  &none  &none
-                                           &none  &none  &none  &none  &none  &none
-                &none                       &trans
+&none         &none           &kp UP_ARROW    &none            &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
+&none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none         &none      &none  &none  &none  &none  &none  &none
+&bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4  &none      &none  &none  &none  &none  &none  &none
+&trans        &trans          &trans          &bt BT_CLR       &none         &none      &none  &none                       &trans
             >;
         };
 
-        // スクロール専用レイヤー（レイヤー5）
-        scroll_layer {
-            label = "Scroll Layer";
+        layer_5 {
             bindings = <
-                &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans
-
-                                           &trans  &trans  &trans  &trans  &trans
-                                           &trans  &trans  &trans  &trans  &trans
-                                           &trans  &trans  &trans  &trans  &trans
-                &trans      &trans      &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
-
-            // ここが重要！レイヤー5 でのみトラックボール = スクロール
-            sensor-bindings = <&scroll_up_down>;
         };
     };
 };
