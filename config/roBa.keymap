@@ -1,4 +1,188 @@
-#include <behaviors.dtsi>
+2025.04.10 木曜日
+20:36 上垣内英輔 keymap_cheatsheet_keyball44 (5).pdf
+2025.04.21 月曜日
+21:47 上垣内英輔 keymap_cheatsheet_keyball44 (7).pdf
+2025.05.12 月曜日
+10:36 上垣内英輔 =IFERROR(INDEX(シートB!A:A, MATCH(B1, シートB!B:B, 0)), "")
+2025.07.10 木曜日
+06:40 上垣内英輔 timetable.pdf
+06:40 上垣内英輔 abstracts.pdf
+2025.07.16 水曜日
+20:56 上垣内英輔 keymap_cheatsheet_klec-02.pdf
+2025.07.24 木曜日
+18:26 上垣内英輔 functionせっていおかしい？
+2025.08.30 土曜日
+21:41 上垣内英輔 https://note.com/nekoiwasi/n/nae4cc83cdbd6
+21:42 上垣内英輔 EPOMAKER TH40-USB.JSON
+21:56 上垣内英輔 EPOMAKER_TH40_firmware.zip
+22:04 上垣内英輔 EPOMAKER_TH40_QMK_version_JSON.zip
+2025.09.02 火曜日
+22:23 上垣内英輔 keymap_cheatsheet_keyball44 (8).pdf
+2025.09.05 金曜日
+07:37 上垣内英輔 keymap_cheatsheet_klec-02 (1).pdf
+2025.09.06 土曜日
+20:31 上垣内英輔 https://youtube.com/shorts/r2iWv1ejYXQ?si=BB6vPbNgqJRKNkIt
+2025.09.11 木曜日
+18:05 上垣内英輔 r04haikihouhou.pdf
+2025.09.17 水曜日
+20:37 上垣内英輔 ギザ歯でかわいい葉子さん.pdf
+2025.09.22 月曜日
+07:32 上垣内英輔 keymap_cheatsheet_klec-02 (2).pdf
+2025.10.04 土曜日
+11:24 上垣内英輔 君がいるだけで.pdf
+11:30 上垣内英輔 君がいるだけで.pdf
+11:32 上垣内英輔 笑えれば-ドラム完コピ楽譜.pdf
+11:32 上垣内英輔 7cd0ada4
+11:33 上垣内英輔 bf4ea207
+2025.10.05 日曜日
+10:15 上垣内英輔 【完コピ】あなたに_MONGOL800【ドラム】.pdf
+10:15 上垣内英輔 058a5610
+10:16 上垣内英輔 すごい速さ.pdf
+10:16 上垣内英輔 643b3c5a
+10:28 上垣内英輔 君が飛び降りるのならば.pdf
+10:29 上垣内英輔 0dbda95e
+2025.10.14 火曜日
+21:12 上垣内英輔 abstracts.pdf
+2025.11.04 火曜日
+21:49 上垣内英輔 
+        // スクロール用（新しく追加！）
+        trackball_scroll: trackball_scroll {
+            compatible = "zmk,behavior-sensor-rotate";
+            #binding-cells = <0>;
+            bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
+            // ↑ 上下スクロール（X軸無視、Y軸でスクロール）
+            sensor = <&pmw3360>;
+            // 感度調整（オプション）
+            scroll-divisor = <4>;  // 1/4 感度（細かくスクロール）
+        };
+    };
+};
+21:53 上垣内英輔  // レイヤー5：スクロール専用レイヤー
+    scroll_layer {
+        label = "Scroll";
+        bindings = <
+            // 他のキーは透明（&trans）でベースレイヤーを引き継ぐ
+            &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans &trans
+
+            &trackball_scroll   // ← ここだけスクロールに！
+        >;
+    };
+};
+2025.11.05 水曜日
+00:06 上垣内英輔 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define SCROLL 3
+#define NUM 6
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
+
+/ {
+    combos { compatible = "zmk,combos"; };
+
+    macros {
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_0";
+        };
+    };
+
+    behaviors {
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+
+            tap-ms = <15>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&kp Q               &kp W         &kp E    &kp R     &kp T                                                   &kp Y        &kp U  &mt LCTRL I  &kp O       &kp P
+&mt LEFT_CONTROL A  &mt LCTRL S   &kp D    &kp F     &kp G        &msc MOVE_Y(5)      &kp LEFT_PARENTHESIS   &kp H        &kp J  &lt 3 K      &kp L       &kp COLON
+&kp Z               &kp X         &kp C    &kp V     &kp B        &lt 2 CAPSLOCK      &kp RIGHT_PARENTHESIS  &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
+&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt 4 SPACE  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        ARROW {
+            bindings = <
+&mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5                                    &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
+&kp LEFT_CONTROL       &none         &trans        &trans        &kp GRAVE  &trans      &kp LEFT_BRACKET   &kp LA(LEFT_ARROW)  &kp LEFT         &kp DOWN       &kp RIGHT_ARROW  &kp SEMI
+&kp LEFT_SHIFT         &none         &none         &none         &trans     &none       &kp RIGHT_BRACKET  &kp LEFT_BRACE      &kp RIGHT_BRACE  &kp SEMICOLON  &trans           &trans
+&trans                 &trans        &trans        &trans        &trans     &trans      &kp DELETE         &trans                                                               &none
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
+        };
+
+        FUNCTION {
+            bindings = <
+&kp PLUS   &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0                               &kp AMPERSAND    &kp F7       &kp F8     &kp LC(TAB)     &kp LC(LS(TAB))
+&kp MINUS  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp PERIOD    &trans        &kp HOME       &kp DOLLAR       &kp PERCENT  &kp CARET  &kp TILDE       &kp PIPE
+&kp ASTRK  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp EQUAL     &trans        &kp END        &kp EXCLAMATION  &kp AT_SIGN  &kp HASH   &kp UNDERSCORE  &kp BACKSLASH
+&kp SLASH  &trans        &trans        &mkp MB1      &kp SPACE     &mkp MB2      &kp BACKSPACE  &trans                                                   &kp LG(D)
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        MEDIA {
+            bindings = <
+&kp LEFT_ALT      &none           &none             &none       &none                       &trans             &trans          &trans           &mkp MB1         &mkp MB2
+&kp LEFT_CONTROL  &kp C_PREVIOUS  &kp C_PLAY_PAUSE  &kp C_NEXT  &none   &trans      &trans  &kp LEFT_ARROW     &kp DOWN_ARROW  &kp UP_ARROW     &kp RIGHT_ARROW  &kp RIGHT_ALT
+&kp LEFT_SHIFT    &none           &none             &none       &none   &none       &none   &kp C_VOLUME_DOWN  &kp K_MUTE      &kp C_VOLUME_UP  &trans           &kp RIGHT_SHIFT
+&trans            &trans          &trans            &trans      &trans  &trans      &trans  &trans                                                               &trans
+            >;
+        };
+
+        BLE {
+            bindings = <
+&none         &none           &kp UP_ARROW    &none            &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
+&none         &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &none         &none      &none  &none  &none  &none  &none  &none
+&bt BT_SEL 0  &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3     &bt BT_SEL 4  &none      &none  &none  &none  &none  &none  &none
+&trans        &trans          &trans          &bt BT_CLR       &none         &none      &none  &none                       &trans
+            >;
+        };
+
+        layer_5 {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
+            >;
+        };
+    };
+};
+00:10 上垣内英輔 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
@@ -149,3 +333,64 @@
         };
     };
 };
+00:25 上垣内英輔 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+
+#define SCROLL 3
+#define NUM 6
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 100
+
+&mt {
+    flavor = "balanced";
+    quick-tap-ms = <0>;
+};
+
+/ {
+    combos { compatible = "zmk,combos"; };
+
+    macros {
+        to_layer_0: to_layer_0 {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
+            label = "TO_LAYER_0";
+        };
+    };
+
+    behaviors {
+        lt_to_layer_0: lt_to_layer_0 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        // スクロール専用ビヘイビア（トラックボール → 上下スクロール）
+        scroll_up_down: scroll_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
+            sensor = <&pmw3360>;           // ← 必要に応じて &pmw3389 など
+            scroll-divisor = <6>;          // スクロール感度（6 = 標準）
+            label = "SCROLL_UP_DOWN";
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // ========================================
+        // デフォルトレイヤー（ベース）
+        // ========================================
+        default_layer {
+            label = "Default";
+
+            // 左半分（21キー）
+            bindings = <
+                &kp Q               &kp W         &kp E         &kp R         &kp T
+                &mt LEFT_CONTROL A  &mt LCTRL S   &kp D         &kp F         &kp G
+                &kp Z               &kp X         &kp C         &kp V         &kp B
+                &kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB       &mkp MB1      &lt 4 SPACE
