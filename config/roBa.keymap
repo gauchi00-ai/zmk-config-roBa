@@ -25,16 +25,23 @@
     };
 
     behaviors {
-
-        lt_to_layer_0: lt_to_layer_0 {
+        // =====================================================
+        // スペース短押し → SPACE
+        // スペース長押し → MEDIAレイヤーに切り替え
+        // =====================================================
+        lt_media_scroll: lt_media_scroll {
             compatible = "zmk,behavior-hold-tap";
-            label = "LAYER_TAP_TO_0";
-            bindings = <&mo>, <&to_layer_0>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            label = "LT_MEDIA_SCROLL";
+            #binding-cells = <0>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";  // ← タップ優先
+            bindings = <&kp SPACE>, <&mo MEDIA>;
         };
 
-        /* --- スクロール動作用（トラックボールなど） --- */
+        // =====================================================
+        // 通常スクロール用（トラックボール or エンコーダ）
+        // =====================================================
         scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -42,7 +49,9 @@
             tap-ms = <15>;
         };
 
-        /* --- ロータリーエンコーダによる拡大縮小 --- */
+        // =====================================================
+        // 拡大・縮小用（ロータリーエンコーダ等）
+        // =====================================================
         zoom_in_out: behavior_sensor_rotate_zoom_in_out {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -50,32 +59,37 @@
             tap-ms = <20>;
         };
 
-        /* --- スペース長押しでMEDIAレイヤー --- */
-        lt_media_scroll: lt_media_scroll {
+        // =====================================================
+        // hold-tap のテンプレ
+        // =====================================================
+        lt_to_layer_0: lt_to_layer_0 {
             compatible = "zmk,behavior-hold-tap";
-            label = "LT_MEDIA_SCROLL";
-            #binding-cells = <0>;
+            label = "LAYER_TAP_TO_0";
+            bindings = <&mo>, <&to_layer_0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
-            bindings = <&kp SPACE>, <&mo MEDIA>;
         };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        /* --- デフォルトレイヤー --- */
+        // =====================================================
+        // DEFAULT LAYER
+        // =====================================================
         default_layer {
             bindings = <
 &kp Q               &kp W         &kp E    &kp R     &kp T                                                   &kp Y        &kp U  &mt LCTRL I  &kp O       &kp P
 &mt LEFT_CONTROL A  &mt LCTRL S   &kp D    &kp F     &kp G        &msc MOVE_Y(5)      &kp LEFT_PARENTHESIS   &kp H        &kp J  &lt 3 K      &kp L       &kp COLON
 &kp Z               &kp X         &kp C    &kp V     &kp B        &lt 2 CAPSLOCK      &kp RIGHT_PARENTHESIS  &kp N        &kp M  &kp COMMA    &kp PERIOD  &kp SLASH
-&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt_media_scroll  &mkp MB2          &kp BACKSPACE          &lt 1 ENTER                     &kp LEFT_WIN
+&kp LEFT_SHIFT      &kp LEFT_ALT  &kp TAB  &mkp MB1  &lt_media_scroll  &mkp MB2            &kp BACKSPACE          &lt 1 ENTER                                  &kp LEFT_WIN
             >;
-            sensor-bindings = <&zoom_in_out>;
+            sensor-bindings = <&zoom_in_out>;  // デフォルトはズーム機能
         };
 
-        /* --- ARROWレイヤー --- */
+        // =====================================================
+        // ARROW LAYER
+        // =====================================================
         ARROW {
             bindings = <
 &mt LEFT_ALT NUMBER_1  &kp NUMBER_2  &kp UP_ARROW  &kp NUMBER_4  &kp N5                                    &kp LC(Y)           &kp LC(Z)        &kp UP_ARROW   &kp LS(LC(O))    &kp MINUS
@@ -86,7 +100,9 @@
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
-        /* --- FUNCTIONレイヤー --- */
+        // =====================================================
+        // FUNCTION LAYER
+        // =====================================================
         FUNCTION {
             bindings = <
 &kp PLUS   &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_0                               &kp AMPERSAND    &kp F7       &kp F8     &kp LC(TAB)     &kp LC(LS(TAB))
@@ -96,7 +112,9 @@
             >;
         };
 
-        /* --- MEDIAレイヤー（トラックボールスクロール） --- */
+        // =====================================================
+        // MEDIA LAYER（ここでスクロール有効）
+        // =====================================================
         MEDIA {
             bindings = <
 &kp LEFT_ALT      &none           &none             &none       &none                       &trans             &trans          &trans           &mkp MB1         &mkp MB2
@@ -104,10 +122,12 @@
 &kp LEFT_SHIFT    &none           &none             &none       &none   &none       &none   &kp C_VOLUME_DOWN  &kp K_MUTE      &kp C_VOLUME_UP  &trans           &kp RIGHT_SHIFT
 &trans            &trans          &trans            &trans      &trans  &trans      &trans  &trans                                                               &trans
             >;
-            sensor-bindings = <&scroll_up_down>;
+            sensor-bindings = <&scroll_up_down>;  // トラックボールでスクロール
         };
 
-        /* --- BLEレイヤー --- */
+        // =====================================================
+        // BLE LAYER
+        // =====================================================
         BLE {
             bindings = <
 &none         &none           &kp UP_ARROW    &none            &none                           &none  &none  &none  &none  &bt BT_CLR_ALL
@@ -117,6 +137,9 @@
             >;
         };
 
+        // =====================================================
+        // LAYER 5 (予備)
+        // =====================================================
         layer_5 {
             bindings = <
 &trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
