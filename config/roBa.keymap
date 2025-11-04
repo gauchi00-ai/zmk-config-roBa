@@ -38,7 +38,7 @@
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
             bindings = <&scroll 0>, <&scroll 0>, <&scroll 0>, <&scroll 0>;
-            sensor = <&pmw3389>;  // あなたのセンサー名に合わせて変更（例: &pmw3360, &pmw3389）
+            sensor = <&pmw3610>;  // あなたのセンサー名に合わせて変更（例: &pmw3360, &pmw3389）
             scroll-divisor = <6>; // スクロール感度（1=速い, 6=標準, 10=遅い）
             label = "SCROLL_UP_DOWN";
         };
