@@ -101,14 +101,14 @@ scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
             sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
-        MOUSE {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
-            >;
-        };
+MOUSE {
+    bindings = <
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &msc SCRL_UP  &msc SCRL_DOWN  &mkp MB2  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans           &trans    &trans    &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                              &trans
+    >;
+};
 
         SCROLL {
             bindings = <
