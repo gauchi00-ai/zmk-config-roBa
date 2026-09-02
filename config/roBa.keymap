@@ -11,6 +11,12 @@
     quick-tap-ms = <0>;
 };
 
+&msc {
+    acceleration-exponent = <0>;
+    time-to-max-speed-ms = <0>;
+    delay-ms = <0>;
+};
+
 / {
     combos {
         compatible = "zmk,combos";
@@ -50,11 +56,11 @@
             tapping-term-ms = <200>;
         };
 
-      scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+    scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
     compatible = "zmk,behavior-sensor-rotate";
     #sensor-binding-cells = <0>;
     bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-    tap-ms = <30>;
+    tap-ms = <5>;
 };
     };
 
