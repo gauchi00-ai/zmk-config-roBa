@@ -1,17 +1,14 @@
+#define ZMK_MOUSE_DEFAULT_SCRL_VAL 10
+
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-
-#define ZMK_MOUSE_DEFAULT_SCRL_VAL 10
-
 #include <dt-bindings/zmk/pointing.h>
 
 &mt {
     flavor = "balanced";
     quick-tap-ms = <0>;
 };
-
-
 
 / {
     combos {
@@ -52,14 +49,13 @@
             tapping-term-ms = <200>;
         };
 
-   scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
-    compatible = "zmk,behavior-sensor-rotate";
-    #sensor-binding-cells = <0>;
+        scroll_up_down: behavior_sensor_rotate_mouse_wheel_up_down {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
 
-    bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
-
-    tap-ms = <1>;
-};
+            tap-ms = <1>;
+        };
     };
 
     keymap {
@@ -67,10 +63,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E      &kp R  &kp T                                                   &kp Y        &kp U  &lt 5 I    &kp O    &lt 4 P
-&mt LCTRL A       &kp S         &kp D      &kp F  &kp G        &mkp MB3                  &kp MINUS        &kp H        &kp J  &kp K      &kp L    &kp SEMICOLON
-&mt LEFT_SHIFT Z  &kp X         &kp C      &kp V  &kp B        &kp F14                   &kp F13          &kp N        &kp M  &kp COMMA  &kp DOT  &mt LSHFT SINGLE_QUOTE
-&kp LEFT_GUI      &kp LEFT_ALT  &kp LCTRL  &mo 3  &lt 2 SPACE  &lt_to_layer_0 1 TAB      &lt 1 BACKSPACE  &lt 3 ENTER                             &kp SLASH
+&kp Q             &kp W         &kp E      &kp R  &kp T                                                    &kp Y        &kp U    &lt 5 I    &kp O    &lt 4 P
+&mt LCTRL A       &kp S         &kp D      &kp F  &kp G        &lt 7 LA(RIGHT_ARROW)      &kp MINUS        &kp H        &lt 7 J  &kp K      &kp L    &kp SEMICOLON
+&mt LEFT_SHIFT Z  &kp X         &kp C      &kp V  &kp B        &kp F14                    &kp F13          &kp N        &kp M    &kp COMMA  &kp DOT  &mt LSHFT SINGLE_QUOTE
+&kp LEFT_GUI      &kp LEFT_ALT  &kp LCTRL  &mo 3  &lt 2 SPACE  &lt_to_layer_0 1 TAB       &lt 1 BACKSPACE  &lt 3 ENTER                               &kp SLASH
             >;
 
             sensor-bindings = <&scroll_up_down>;
@@ -134,9 +130,9 @@
 
         SCROLL2 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                      &trans  &trans          &msc SCRL_UP    &trans          &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &msc SCRL_LEFT  &trans          &msc SCRL_RIGHT  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans          &msc SCRL_DOWN  &trans          &trans  &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans
             >;
         };
