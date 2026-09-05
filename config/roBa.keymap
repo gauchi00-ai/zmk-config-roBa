@@ -14,19 +14,9 @@
     combos {
         compatible = "zmk,combos";
 
-        left_click {
-            bindings = <&mkp MB1>;
-            key-positions = <18 19>;
-        };
-
-        right_click {
-            bindings = <&mkp RCLK>;
-            key-positions = <19 20>;
-        };
-
         mid_click {
             bindings = <&mkp MB3>;
-            key-positions = <18 7>;
+            key-positions = <18 19>;
         };
     };
 
@@ -63,10 +53,10 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E      &kp R  &kp T                                                   &kp Y        &kp U    &lt 5 I    &kp O    &lt 4 P
-&mt LCTRL A       &kp S         &kp D      &kp F  &kp G        &lt 7 LA(LEFT_ARROW)      &kp MINUS        &kp H        &lt 7 J  &kp K      &kp L    &mt LCTRL SEMI
-&mt LEFT_SHIFT Z  &kp X         &kp C      &kp V  &kp B        &kp F14                   &kp F13          &kp N        &kp M    &kp COMMA  &kp DOT  &mt LSHFT SLASH
-&kp LEFT_GUI      &kp LEFT_ALT  &kp LCTRL  &mo 3  &lt 2 SPACE  &lt_to_layer_0 1 TAB      &lt 1 BACKSPACE  &lt 3 ENTER                               &kp SINGLE_QUOTE
+&kp Q             &kp W         &kp E      &kp R  &kp T                                                   &kp Y        &kp U  &lt 7 I    &kp O    &lt 4 P
+&mt LCTRL A       &kp S         &kp D      &kp F  &kp G        &lt 7 LA(LEFT_ARROW)      &kp MINUS        &kp H        &kp J  &kp K      &kp L    &mt LCTRL SEMI
+&mt LEFT_SHIFT Z  &kp X         &kp C      &kp V  &kp B        &kp F14                   &kp F13          &kp N        &kp M  &kp COMMA  &kp DOT  &mt LSHFT SLASH
+&kp LEFT_GUI      &kp LEFT_ALT  &kp LCTRL  &mo 3  &lt 2 SPACE  &lt_to_layer_0 1 TAB      &lt 1 BACKSPACE  &lt 3 ENTER                             &kp SINGLE_QUOTE
             >;
 
             sensor-bindings = <&scroll_up_down>;
