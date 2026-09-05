@@ -22,8 +22,7 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        input-processors = <
-            &zip_temp_layer 8 2000
+        input-processors =  <&zip_temp_layer 8 2000>;
         >;
 
         scroll_mode {
@@ -36,10 +35,10 @@
 };
 
     snipe_mode {
-        layer = <9>;
+        layers = <9>;
 
         input-processors =
-            <&zip_scroll_scaler 1 18>,
+            <&zip_scroll_scaler 1 18>;
     };
 };
 
