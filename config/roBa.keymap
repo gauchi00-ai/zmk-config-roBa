@@ -20,6 +20,16 @@
             bindings = <&mkp MB3>;
             key-positions = <18 19>;
         };
+
+        modroru {
+            bindings = <&kp LA(LEFT_ARROW)>;
+            key-positions = <17 18>;
+        };
+
+        susumu {
+            bindings = <&kp LA(RIGHT_ARROW)>;
+            key-positions = <19 20>;
+        };
     };
 
     macros {
