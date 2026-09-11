@@ -16,6 +16,17 @@
         ;
 };
 
+&zip_time_layer {
+    exclded-position = <
+        18 // J
+        19 // K
+    >;
+};
+
+&zip_time_layer {
+    require-prior-idle-ms = <150>;
+};
+
 / {
     trackball_listener {
         status = "okay";
