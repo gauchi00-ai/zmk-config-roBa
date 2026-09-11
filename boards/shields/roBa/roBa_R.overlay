@@ -17,14 +17,6 @@
 };
 
 &zip_temp_layer {
-    excluded-position = <
-        18 // J
-        19 // K
-        20 // L
-    >;
-};
-
-&zip_temp_layer {
     require-prior-idle-ms = <150>;
 };
 
