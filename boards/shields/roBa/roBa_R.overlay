@@ -1,6 +1,8 @@
 #include "roBa.dtsi"
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
+#include <mouse-gesture.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
     col-offset = <6>;
@@ -32,23 +34,90 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        input-processors = <&zip_temp_layer 8 2000>;
+        /*
+         * 通常時：
+         * トラックボールを動かすとLayer 8を一時的に有効化
+         */
+        input-processors =
+            <&zip_temp_layer 8 2000>,
+            <&zip_mouse_gesture>;
 
+        /*
+         * Layer 7：スクロール
+         */
         scroll_mode {
             layers = <7>;
 
             input-processors =
+                <&zip_mouse_gesture>,
                 <&zip_xy_to_scroll_mapper>,
                 <&zip_scroll_scaler 1 10>,
                 <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
         };
 
+        /*
+         * Layer 9：スナイプ
+         */
         snipe_mode {
             layers = <9>;
 
             input-processors =
+                <&zip_mouse_gesture>,
                 <&zip_xy_scaler 1 18>;
         };
+    };
+};
+
+/*
+ * マウスジェスチャー
+ */
+&zip_mouse_gesture {
+    /*
+     * 1ストロークとして認識する移動量
+     * デフォルト200 → 300に設定
+     */
+    stroke-size = <300>;
+
+    /*
+     * ジェスチャーを常時有効化
+     */
+    always-active;
+
+    /*
+     * パターンが完成したらすぐ実行
+     */
+    enable-eager-mode;
+
+    /*
+     * 右 → 戻る
+     */
+    history_back {
+        pattern = <GESTURE_RIGHT>;
+        bindings = <&kp LA(LEFT)>;
+    };
+
+    /*
+     * 左 → 進む
+     */
+    history_forward {
+        pattern = <GESTURE_LEFT>;
+        bindings = <&kp LA(RIGHT)>;
+    };
+
+    /*
+     * 下 → 右 → タブを閉じる
+     */
+    close_tab {
+        pattern = <GESTURE_DOWN GESTURE_RIGHT>;
+        bindings = <&kp LC(W)>;
+    };
+
+    /*
+     * 下 → 左 → 新しいタブ
+     */
+    new_tab {
+        pattern = <GESTURE_DOWN GESTURE_LEFT>;
+        bindings = <&kp LC(T)>;
     };
 };
 
