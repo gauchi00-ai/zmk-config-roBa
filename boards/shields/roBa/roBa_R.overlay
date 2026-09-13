@@ -95,12 +95,12 @@
 
 history_back {
     pattern = <8>;
-    bindings = <&kp LA(LEFT)>;
+    bindings = <&kp LEFT>;
 };
 
 history_forward {
     pattern = <4>;
-    bindings = <&kp LA(RIGHT)>;
+    bindings = <&kp RIGHT>;
 };
 
 close_tab {
