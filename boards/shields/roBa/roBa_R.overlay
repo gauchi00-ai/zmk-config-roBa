@@ -93,37 +93,25 @@
      */
     enable-eager-mode;
 
-    /*
-     * 右 → 戻る
-     */
-    history_back {
-        pattern = <GESTURE_RIGHT>;
-        bindings = <&kp LA(LEFT)>;
-    };
+history_back {
+    pattern = <8>;
+    bindings = <&kp LA(LEFT)>;
+};
 
-    /*
-     * 左 → 進む
-     */
-    history_forward {
-        pattern = <GESTURE_LEFT>;
-        bindings = <&kp LA(RIGHT)>;
-    };
+history_forward {
+    pattern = <4>;
+    bindings = <&kp LA(RIGHT)>;
+};
 
-    /*
-     * 下 → 右 → タブを閉じる
-     */
-    close_tab {
-        pattern = <GESTURE_DOWN GESTURE_RIGHT>;
-        bindings = <&kp LC(W)>;
-    };
+close_tab {
+    pattern = <2 8>;
+    bindings = <&kp LC(W)>;
+};
 
-    /*
-     * 下 → 左 → 新しいタブ
-     */
-    new_tab {
-        pattern = <GESTURE_DOWN GESTURE_LEFT>;
-        bindings = <&kp LC(T)>;
-    };
+new_tab {
+    pattern = <2 4>;
+    bindings = <&kp LC(T)>;
+};
 };
 
 &pinctrl {
