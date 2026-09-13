@@ -94,25 +94,7 @@
      */
     enable-eager-mode;
 
-history_back {
-    pattern = <8>;
-    bindings = <&kp LEFT>;
-};
 
-history_forward {
-    pattern = <4>;
-    bindings = <&kp RIGHT>;
-};
-
-close_tab {
-    pattern = <2 8>;
-    bindings = <&kp LC(W)>;
-};
-
-new_tab {
-    pattern = <2 4>;
-    bindings = <&kp LC(T)>;
-};
 };
 
 &pinctrl {
