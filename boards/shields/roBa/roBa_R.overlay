@@ -4,6 +4,11 @@
 #include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
+#define GESTURE_UP 0
+#define GESTURE_DOWN 1
+#define GESTURE_LEFT 2
+#define GESTURE_RIGHT 3
+
 &default_transform {
     col-offset = <6>;
 };
