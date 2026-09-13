@@ -1,3 +1,4 @@
+```dts
 #include "roBa.dtsi"
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
@@ -39,8 +40,7 @@
          * トラックボールを動かすとLayer 8を一時的に有効化
          */
         input-processors =
-            <&zip_temp_layer 8 2000>,
-            <&zip_mouse_gesture>;
+            <&zip_temp_layer 8 2000>;
 
         /*
          * Layer 7：スクロール
@@ -49,7 +49,6 @@
             layers = <7>;
 
             input-processors =
-                <&zip_mouse_gesture>,
                 <&zip_xy_to_scroll_mapper>,
                 <&zip_scroll_scaler 1 10>,
                 <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
@@ -62,26 +61,33 @@
             layers = <9>;
 
             input-processors =
-                <&zip_mouse_gesture>,
                 <&zip_xy_scaler 1 18>;
+        };
+
+        /*
+         * Layer 10：マウスジェスチャー
+         *
+         * Layer 10が有効なときだけ、
+         * トラックボールのXY入力をジェスチャーとして処理する。
+         */
+        gesture_mode {
+            layers = <10>;
+
+            input-processors =
+                <&zip_mouse_gesture>;
         };
     };
 };
 
 /*
- * マウスジェスチャー
+ * マウスジェスチャー設定
  */
 &zip_mouse_gesture {
     /*
      * 1ストロークとして認識する移動量
-     * デフォルト200 → 300に設定
+     * デフォルト200 → 300
      */
     stroke-size = <300>;
-
-    /*
-     * ジェスチャーを常時有効化
-     */
-    always-active;
 
     /*
      * パターンが完成したらすぐ実行
@@ -164,3 +170,4 @@
         invert-x;
     };
 };
+```
