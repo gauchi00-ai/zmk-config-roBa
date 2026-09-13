@@ -2,7 +2,6 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 #include <dt-bindings/zmk/keys.h>
-#include <mouse-gesture.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
@@ -63,38 +62,6 @@
             input-processors =
                 <&zip_xy_scaler 1 18>;
         };
-
-        /*
-         * Layer 10：マウスジェスチャー
-         *
-         * Layer 10が有効なときだけ、
-         * トラックボールのXY入力をジェスチャーとして処理する。
-         */
-        gesture_mode {
-            layers = <10>;
-
-            input-processors =
-                <&zip_mouse_gesture>;
-        };
-    };
-};
-
-/*
- * マウスジェスチャー設定
- */
-&zip_mouse_gesture {
-    /*
-     * 1ストロークとして認識する移動量
-     * デフォルト200 → 300
-     */
-    stroke-size = <300>;
-
-    /*
-     * パターンが完成したらすぐ実行
-     */
-    enable-eager-mode;
-
-
 };
 
 &pinctrl {
